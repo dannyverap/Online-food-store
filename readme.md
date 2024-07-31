@@ -19,6 +19,8 @@ docker compose down
 The "Online Food Store" application is designed to manage various aspects of an online food ordering system. Below is a
 detailed explanation of the database schema and how the different entities interact with each other.
 
+![DB](https://github.com/user-attachments/assets/2d3596d5-334d-4fcf-95db-53984ade2c13)
+
 ### User Management
 
 - **User (`user`)**: This table stores the information of users registered in the system. A user can have one of three

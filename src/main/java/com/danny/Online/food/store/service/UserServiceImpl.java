@@ -20,7 +20,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public User findUserByToken(String token) throws Exception {
         String email = jwtProvider.getEmailFromJWT(token);
 
@@ -28,14 +27,10 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new Exception("User not found");
         }
-        //TODO: Alternative to not force favorites and addresses to be loaded
-        user.getFavorites().size();
-        user.getAddresses().size();
         return user;
     }
 
     @Override
-    @Transactional
     public User findUserByEmail(String email) throws Exception {
         User user = userRepository.findByEmail(email);
         if (user == null) {

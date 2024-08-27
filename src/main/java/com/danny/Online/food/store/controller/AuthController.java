@@ -24,6 +24,7 @@ public class AuthController {
         this.customerUserDetailsService = customerUserDetailsService;
     }
 
+    //TODO: SET AUTHORITIES ON TOKEN WHEN USER SIGN UP
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
         AuthResponse authResponse = authUserService.SignUp(user);

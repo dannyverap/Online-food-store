@@ -16,6 +16,6 @@ public interface RestaurantService {
     public List<Restaurant> searchRestaurants(String query);
     public Restaurant getRestaurantById(Long restaurantId) throws Exception;
     public Restaurant getRestaurantByUserId(Long userId) throws Exception;
-    public RestaurantDto toggleFavouriteStatus(Long restaurantId, User user) throws Exception;
+    public RestaurantDto toggleFavoriteStatus(Long restaurantId, User user) throws Exception;
     public Restaurant updateRestaurantStatus(Long restaurantId) throws Exception;
 }

@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+//TODO: PREVENT CHANGING DATA OF RESTAURANT IF USER IS NOT OWNER
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
@@ -24,7 +25,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final UserRepository userRepository;
 
     @Autowired
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, AddressRepository addressRepository, UserRepository userRepository) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository,
+                                 AddressRepository addressRepository,
+                                 UserRepository userRepository) {
         this.restaurantRepository = restaurantRepository;
         this.addressRepository = addressRepository;
         this.userRepository = userRepository;
@@ -99,20 +102,31 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public RestaurantDto toggleFavouriteStatus(Long restaurantId, User user) throws Exception {
+    public RestaurantDto toggleFavoriteStatus(Long restaurantId, User user) throws Exception {
         Restaurant restaurant = getRestaurantById(restaurantId);
 
         RestaurantDto restaurantDto = new RestaurantDto();
+        restaurantDto.setId(restaurant.getId());
         restaurantDto.setDescription(restaurant.getDescription());
         restaurantDto.setImages(restaurant.getImages());
         restaurantDto.setTitle(restaurant.getName());
-        restaurantDto.setImages(restaurant.getImages());
 
-        if (user.getFavorites().contains(restaurantDto)) {
-            user.getFavorites().remove(restaurantDto);
+        boolean isFavorite = false;
+
+        List<RestaurantDto> favorites = user.getFavorites();
+        for (RestaurantDto favorite : favorites) {
+            if (favorite.getId().equals(restaurantDto.getId())) {
+                isFavorite = true;
+                break;
+            }
+        }
+
+        if (isFavorite) {
+            favorites.removeIf(favorite -> favorite.getId().equals(restaurantId));
         } else {
             user.getFavorites().add(restaurantDto);
         }
+
         userRepository.save(user);
 
         return restaurantDto;

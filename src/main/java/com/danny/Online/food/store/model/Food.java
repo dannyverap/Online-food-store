@@ -40,7 +40,7 @@ public class Food {
     private boolean isSeasonal;
 
     @ManyToOne
-    private IngredientsItem ingredientsItem;
+    private List<IngredientsItem> ingredientsItem;
 
     private Date creationDate;
 }

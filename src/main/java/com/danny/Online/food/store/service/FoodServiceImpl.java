@@ -5,10 +5,12 @@ import com.danny.Online.food.store.model.FoodCategory;
 import com.danny.Online.food.store.model.Restaurant;
 import com.danny.Online.food.store.repository.FoodRepository;
 import com.danny.Online.food.store.request.CreateFoodRequest;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class FoodServiceImpl implements FoodService {
 
     private final FoodRepository foodRepository;
